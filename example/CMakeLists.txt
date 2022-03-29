@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC On)
 set(CMAKE_AUTORCC ON)
 
-if(NOT QT_VERSION)
-  set(QT_VERSION Qt5)
+if(NOT Qt_VERSION)
+  set(Qt_VERSION Qt5)
 endif()
-find_package(${QT_VERSION} COMPONENTS Widgets Gui REQUIRED)
+find_package(${Qt_VERSION} COMPONENTS Widgets Gui REQUIRED)
 
 add_executable(QCodeEditorExample
     resources/demo_resources.qrc
@@ -25,8 +25,8 @@ target_include_directories(QCodeEditorExample PUBLIC
 )
 
 target_link_libraries(QCodeEditorExample
-    ${QT_VERSION}::Core
-    ${QT_VERSION}::Widgets
-    ${QT_VERSION}::Gui
+    ${Qt_VERSION}::Core
+    ${Qt_VERSION}::Widgets
+    ${Qt_VERSION}::Gui
     QCodeEditor
 )

@@ -10,6 +10,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(GNUInstallDirs)
 
+if(NOT Qt_VERSION)
+    set(Qt_VERSION Qt5)
+endif()
+message(STATUS "QCodeEditor : used Qt version ${Qt_VERSION}")
+
+
 option(BUILD_EXAMPLE "Example building required" Off)
 if (${BUILD_EXAMPLE})
     message(STATUS "QCodeEditor example will be built.")
@@ -83,10 +89,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Find includes in corresponding build directories
-if(NOT QT_VERSION)
-  set(QT_VERSION Qt5)
-endif()
-find_package(${QT_VERSION} REQUIRED COMPONENTS Core Gui Widgets)
+find_package(${Qt_VERSION} REQUIRED COMPONENTS Core Gui Widgets)
 
 if(NOT TYPEOFLIBRARY)
   set(TYPEOFLIBRARY SHARED)
@@ -136,9 +139,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 target_link_libraries(QCodeEditor
-    ${QT_VERSION}::Core
-    ${QT_VERSION}::Widgets
-    ${QT_VERSION}::Gui
+    ${Qt_VERSION}::Core
+    ${Qt_VERSION}::Widgets
+    ${Qt_VERSION}::Gui
 )
 
 # Install files to use "find_package(QCodeEditor )"
