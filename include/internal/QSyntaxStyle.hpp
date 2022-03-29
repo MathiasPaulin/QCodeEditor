@@ -55,6 +55,11 @@ class QSyntaxStyle : public QObject
      */
     static QSyntaxStyle *defaultStyle();
 
+    /**
+     * @brief Static method for getting default dark style (drakula).
+     * @return Pointer to default dark style.
+     */
+    static QSyntaxStyle *defaultDarkStyle();
   private:
     QString m_name;
 

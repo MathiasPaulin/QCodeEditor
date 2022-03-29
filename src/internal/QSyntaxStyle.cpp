@@ -137,6 +137,29 @@ bool QSyntaxStyle::isLoaded() const
     return m_loaded;
 }
 
+
+QSyntaxStyle *QSyntaxStyle::defaultDarkStyle()
+{
+    static QSyntaxStyle darkStyle;
+
+    if (!darkStyle.isLoaded())
+    {
+        Q_INIT_RESOURCE(qcodeeditor_resources);
+        QFile fl(":/drakula_style.xml");
+
+        if (!fl.open(QIODevice::ReadOnly))
+        {
+            return &darkStyle;
+        }
+
+        if (!darkStyle.load(fl.readAll()))
+        {
+            qDebug() << "Can't load default dark style.";
+        }
+    }
+
+    return &darkStyle;
+}
 QSyntaxStyle *QSyntaxStyle::defaultStyle()
 {
     static QSyntaxStyle style;
