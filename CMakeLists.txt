@@ -118,7 +118,7 @@ install(TARGETS QCodeEditor EXPORT QCodeEditorTarget
 	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/QCodeEditor
 )
 
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/QCodeEditor
 )
 
@@ -167,7 +167,14 @@ install(
 	DESTINATION ${INSTALL_CONFIGDIR}
 )
 
-install(EXPORT QCodeEditorTarget
+export(
+    TARGETS QCodeEditor
+    NAMESPACE QCodeEditor::
+    FILE QCodeEditorTargets.cmake
+)
+
+install(
+    EXPORT QCodeEditorTarget
 	FILE QCodeEditorTargets.cmake
 	NAMESPACE QCodeEditor::
 	DESTINATION ${INSTALL_CONFIGDIR}
