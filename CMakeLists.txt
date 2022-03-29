@@ -89,7 +89,7 @@ endif()
 find_package(${QT_VERSION} REQUIRED COMPONENTS Core Gui Widgets)
 
 if(NOT TYPEOFLIBRARY)
-  set(TYPEOFLIBRARY STATIC)
+  set(TYPEOFLIBRARY SHARED)
 endif()
 add_library(QCodeEditor ${TYPEOFLIBRARY}
     ${RESOURCES_FILE}
@@ -105,7 +105,8 @@ if (TYPEOFLIBRARY STREQUAL "SHARED")
 endif()
 
 target_include_directories(QCodeEditor PUBLIC
-	PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/include
+	PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/externals/interval-tree/include>
 	PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/QCodeEditor>
 )
 
@@ -115,6 +116,10 @@ install(TARGETS QCodeEditor EXPORT QCodeEditorTarget
 )
 
 install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/QCodeEditor
+)
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/externals/interval-tree/include/interval-tree"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/QCodeEditor
 )
 
